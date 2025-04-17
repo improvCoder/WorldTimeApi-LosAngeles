@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel='stylesheet' href='style.css'>
+  </head>
+  <body>
+    <h1 id='h1'></h1>
+    <h2 id='h2'></h2>
+    <h3 id='h3'></h3>
+
+    <script>
+      function clock(){
+ fetch('http://worldtimeapi.org/api/timezone/America/Los_Angeles')
+    .then(res=>res.json())
+    .then(data=>{
+	
+	let time=''
+	let date=''
+	let timez=''
+	let s=data.datetime
+	let a=data.timezone
+
+	for(i=0;i<10;i++){
+	    date=date+s[i]
+	}
+	for(i=0;i<19;i++){
+	    timez=timez+a[i]
+	}
+	for(i=11;i<19;i++){
+	    time=time+s[i]
+	}
+	document.getElementById('h1').textContent=timez;
+	document.getElementById('h2').textContent=date;
+	document.getElementById('h3').textContent=time;
+	    
+
+    })
+    .catch(error=>{
+	document.getElementById('h2').textContent=error
+    })
+      }
+      
+      clock()
+      setInterval(clock,1000)
+</script>
+</body>
+</html>
